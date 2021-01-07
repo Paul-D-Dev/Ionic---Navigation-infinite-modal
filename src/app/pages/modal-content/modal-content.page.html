@@ -1,9 +1,45 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>modalContent</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button *ngIf="level > 0"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Développeurs</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <!-- Open another modal -->
+
+
+  <!-- Section level 0 -->
+  <section *ngIf="level===0">
+    Level 0
+
+    <!-- Navigation link -->
+    <ion-nav-link 
+      router-direction="forward"
+      [component]="nextPage"
+      [componentProps]="{level: level+1}"
+      *ngFor="let item of array; index as i"
+      (click)='setInfoId(i)'>
+      <ion-button expand="full" color="success">
+        {{item.name}}
+      </ion-button>
+    </ion-nav-link>
+    <!-- End Navigation link -->
+  </section>
+  <!-- End Section level 0 -->
+
+  <!-- Section level 1 -->
+  <section *ngIf="level===1">
+    Level 1
+  </section>
+  <!-- End Section level 1 -->
 
 </ion-content>

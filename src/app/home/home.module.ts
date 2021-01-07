@@ -1,10 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { SharedComponentsModule } from './../components/shared-components.module';
+import { ModalContentPageModule } from './../pages/modal-content/modal-content.module';
+import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
 
-import { HomePageRoutingModule } from './home-routing.module';
 
 
 @NgModule({
@@ -12,7 +14,9 @@ import { HomePageRoutingModule } from './home-routing.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    SharedComponentsModule,
+    ModalContentPageModule // Import module because it's will be a real content and we'll use the page directly
   ],
   declarations: [HomePage]
 })

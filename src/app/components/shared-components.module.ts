@@ -6,7 +6,7 @@ import { ModalBaseComponent } from './modal-base/modal-base.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ModalBaseComponent],
   imports: [
     CommonModule,
     IonicModule

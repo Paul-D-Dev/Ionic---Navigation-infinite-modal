@@ -1,51 +1,46 @@
+<!-- Header -->
 <ion-header>
   <ion-toolbar color="primary">
+    
     <ion-buttons slot="start">
       <ion-back-button *ngIf="level > 0"></ion-back-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="close()">
-        <ion-icon slot="icon-only" name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    
     <ion-title>Développeurs</ion-title>
+    
+    <ion-buttons slot="end">
+      <ion-buttons (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-buttons>
+    </ion-buttons>
+    
   </ion-toolbar>
 </ion-header>
+<!-- End Header -->
 
-<ion-content>
 
+<ion-content>  
 
   <!-- Section level 0 -->
   <section *ngIf="level===0">
-    <!-- Navigation link -->
-    <ion-nav-link 
-      router-direction="forward"
-      [component]="nextPage"
-      [componentProps]="{level: level+1, 
-                          arrayId: i}"
-      *ngFor="let item of array; index as i">
-      <ion-button expand="full" color="success">
-        {{item.name}}
-      </ion-button>
-    </ion-nav-link>
-    <!-- End Navigation link -->
-  </section>
-  <!-- End Section level 0 -->
-
-
-
-  <!-- Section level 1 -->
-  <section *ngIf="level===1">
 
     <!-- breadcrumb -->
     <div>
-      <ion-nav-link router-direction='back'>{{array[arrayId].name}}</ion-nav-link>
-       > Sites
+      <span (click)='close()'>{{dev.name}}</span>
+      > Sites
     </div>
-    
-    <ion-list *ngFor="let item of array[arrayId].sites; index as i">
-      <ion-nav-link [component]="nextPage"
-      [componentProps]="{level: level+1, arrayId: arrayId, siteId: i}">
+    <!-- End breadcrumb -->
+
+
+    <!-- Navigation link -->
+    <ion-list *ngFor="let item of dev.sites; index as i">
+      <ion-nav-link 
+        router-direction="forward"
+        [component]="nextPage"
+        [componentProps]="{level: level+1,
+                           site: dev.sites[i],
+                           dev: dev,
+                          developpersArray: developpersArray}">
         <ion-card>
           <ion-card-header>
             <ion-card-title>{{item.name}}</ion-card-title>
@@ -55,46 +50,45 @@
             <p>{{item.deploy}}</p>
           </ion-card-content>
         </ion-card>
-        
       </ion-nav-link>
     </ion-list>
+    <!-- End Navigation link -->
 
+  </section>
+  <!-- End Section level 0 -->
+
+
+
+  <!-- Section level 1 -->
+  <section *ngIf="level===1">
+
+      <!-- BreadCrumb -->
+      <div>
+      
+        <span (click)='close()'>{{dev.name}}</span>
+        > 
+        <ion-nav-link
+          router-direction="back">
+          {{site.name}} 
+        </ion-nav-link>
+        > Client
+  
+      </div>
+  
+      <div>
+        {{site.client.name}}
+      </div>
+  
+      <!-- Display others Dev -->
+
+      <h1>See others developpers</h1>
+      <ion-card (click)="subModal(i)" *ngFor="let dev of developpersArray; index as i">
+        <ion-card-header>
+          <ion-card-title>{{dev.name}}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+   
   </section>
   <!-- End Section level 1 -->
-
-
-
-  <!-- Section level 2 -->
-  <section *ngIf="level===2">
-
-    <!-- BreadCrumb -->
-    <div>
-      
-      <ion-nav-link 
-        [component]="nextPage"
-        [componentProps]="{level: 0}">
-        {{array[arrayId].name}}
-      </ion-nav-link>
-      > 
-      <ion-nav-link
-        router-direction="back">
-        {{array[arrayId].sites[siteId].name}} 
-      </ion-nav-link>
-      > Client
-
-    </div>
-
-    <div>
-      {{array[arrayId].sites[siteId].client.name}}
-    </div>
-
-    <!-- Display others Dev -->
-    <ion-card (click)="subModal()">
-      <ion-card-header>
-        <ion-card-title>{{array[1].name}}</ion-card-title>
-      </ion-card-header>
-    </ion-card>
-  </section>
-  <!-- End Section level 2 -->
 
 </ion-content>

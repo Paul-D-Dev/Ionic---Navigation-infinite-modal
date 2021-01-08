@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { ModalBaseComponent } from '../../components/modal-base/modal-base.component';
+import { Developer, Site } from './../../models/developper.models';
 
 @Component({
   selector: 'app-modal-content',
@@ -9,66 +10,14 @@ import { ModalBaseComponent } from '../../components/modal-base/modal-base.compo
 })
 export class ModalContentPage implements OnInit {
   level = 0;
-  arrayId = 0;
-  siteId: number;
+  site: Site;
   nextPage = ModalContentPage;
+  dev: Developer;
+  developpersArray: Developer[];
 
-  array=[
-    {
-      id:1,
-      name: 'Paul',
-      sites: [
-        {
-          id: 1,
-          name: 'fts',
-          deploy: '01/01/2020',
-          client : {
-            id:1,
-            name: 'Ludovic'
-          }
-        },
-        {
-          id: 2,
-          name: 'kraak',
-          deploy: '25/02/2020',
-          client : {
-            id:2,
-            name: 'Camille'
-          }
-    
-        }
-    
-      ]
-    },
-    {
-      id:2,
-      name: 'Mathieu',
-      sites: [
-        {
-          id: 3,
-          name: 'Yummy',
-          deploy: '01/01/2020',
-          client : {
-            id:3,
-            name: 'Mat'
-          }
-        },
-        {
-          id: 4,
-          name: 'D',
-          deploy: '25/02/2020',
-          client : {
-            id:4,
-            name: 'Paul'
-          }
-    
-        }
-    
-      ]
-    }
-  ]
 
-  constructor(private modalController: ModalController) {}
+
+  constructor(private modalController: ModalController, private navParams: NavParams) {}
 
   ngOnInit() {}
 
@@ -76,12 +25,16 @@ export class ModalContentPage implements OnInit {
     this.modalController.dismiss();
   }
 
-  async subModal() {
+  // Open new modal in the current modal
+  async subModal(id: number) {
     const modal = await this.modalController.create({
       component: ModalBaseComponent,
       swipeToClose: true,
+      // Props in the Modal Base
       componentProps: {
         rootPage: ModalContentPage,
+        dev: this.developpersArray[id],
+        devs: this.developpersArray
       },
     });
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Developer } from './../../models/developper.models';
 
 @Component({
   selector: 'app-modal-base',
@@ -8,8 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class ModalBaseComponent implements OnInit {
 
   rootPage: any;
+  @Input() dev: Developer;
+  devs: Developer[]; // no need to add input
+  
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
 }

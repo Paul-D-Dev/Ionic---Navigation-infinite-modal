@@ -1,11 +1,13 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Ionic Modal Nav
+      Developpers
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button expand="full" (click)="presentModal()">Open Modal</ion-button>
+  <div *ngFor="let dev of developpersArray; index as i">
+    <ion-button expand="full" (click)="presentModal(i)">{{dev.name}}</ion-button>
+  </div>
 </ion-content>

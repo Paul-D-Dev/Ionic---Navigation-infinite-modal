@@ -13,8 +13,10 @@ import { ModalContentPage } from './modal-content.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ModalContentPageRoutingModule
+    ModalContentPageRoutingModule,
   ],
-  declarations: [ModalContentPage]
+  declarations: [
+    ModalContentPage,
+  ]
 })
 export class ModalContentPageModule {}

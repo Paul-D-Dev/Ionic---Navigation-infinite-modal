@@ -9,6 +9,7 @@ import { ModalController } from '@ionic/angular';
 export class ModalContentPage implements OnInit {
   level = 0;
   arrayId = 0;
+  siteId: number;
   nextPage = ModalContentPage;
 
   array=[
@@ -74,7 +75,5 @@ export class ModalContentPage implements OnInit {
     this.modalController.dismiss();
   }
 
-  setInfoId(i: number ) {
-    this.arrayId = i;
-  }
+
 }

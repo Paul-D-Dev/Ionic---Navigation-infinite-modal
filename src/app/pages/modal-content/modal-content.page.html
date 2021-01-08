@@ -14,20 +14,16 @@
 
 <ion-content>
 
-  <!-- Open another modal -->
-
 
   <!-- Section level 0 -->
   <section *ngIf="level===0">
-    Level 0
-
     <!-- Navigation link -->
     <ion-nav-link 
       router-direction="forward"
       [component]="nextPage"
-      [componentProps]="{level: level+1}"
-      *ngFor="let item of array; index as i"
-      (click)='setInfoId(i)'>
+      [componentProps]="{level: level+1, 
+                          arrayId: i}"
+      *ngFor="let item of array; index as i">
       <ion-button expand="full" color="success">
         {{item.name}}
       </ion-button>
@@ -36,10 +32,30 @@
   </section>
   <!-- End Section level 0 -->
 
+
+
   <!-- Section level 1 -->
   <section *ngIf="level===1">
-    Level 1
+    Sites : 
+    <div>
+      <ion-nav-link [component]="nextPage"
+      [componentProps]="{level: level+1, 
+                          arrayId: arrayId,
+                          siteId: i}"
+      *ngFor="let item of array[arrayId].sites; index as i">
+        {{item.name}}
+      </ion-nav-link>
+    </div>
   </section>
   <!-- End Section level 1 -->
+
+
+
+  <!-- Section level 2 -->
+  <section *ngIf="level===2">
+    Client
+    {{array[arrayId].sites[siteId].client.name}}
+  </section>
+  <!-- End Section level 2 -->
 
 </ion-content>

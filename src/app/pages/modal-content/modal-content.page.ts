@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { ModalBaseComponent } from '../../components/modal-base/modal-base.component';
 
 @Component({
   selector: 'app-modal-content',
@@ -73,6 +74,18 @@ export class ModalContentPage implements OnInit {
 
   close() {
     this.modalController.dismiss();
+  }
+
+  async subModal() {
+    const modal = await this.modalController.create({
+      component: ModalBaseComponent,
+      swipeToClose: true,
+      componentProps: {
+        rootPage: ModalContentPage,
+      },
+    });
+
+    await modal.present();
   }
 
 

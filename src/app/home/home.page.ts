@@ -20,7 +20,6 @@ export class HomePage {
   // https://ionicframework.com/docs/api/modal
   async presentModal() {
     const modal = await this.modalController.create({
-      presentingElement: this.routerOutlet.nativeEl,
       component: ModalBaseComponent,
       swipeToClose: true, // Only applies in iOS mode
       componentProps: { // Passing data

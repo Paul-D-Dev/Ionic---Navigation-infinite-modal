@@ -87,6 +87,13 @@
     <div>
       {{array[arrayId].sites[siteId].client.name}}
     </div>
+
+    <!-- Display others Dev -->
+    <ion-card (click)="subModal()">
+      <ion-card-header>
+        <ion-card-title>{{array[1].name}}</ion-card-title>
+      </ion-card-header>
+    </ion-card>
   </section>
   <!-- End Section level 2 -->
 

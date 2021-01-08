@@ -36,16 +36,29 @@
 
   <!-- Section level 1 -->
   <section *ngIf="level===1">
-    Sites : 
+
+    <!-- breadcrumb -->
     <div>
-      <ion-nav-link [component]="nextPage"
-      [componentProps]="{level: level+1, 
-                          arrayId: arrayId,
-                          siteId: i}"
-      *ngFor="let item of array[arrayId].sites; index as i">
-        {{item.name}}
-      </ion-nav-link>
+      <ion-nav-link router-direction='back'>{{array[arrayId].name}}</ion-nav-link>
+       > Sites
     </div>
+    
+    <ion-list *ngFor="let item of array[arrayId].sites; index as i">
+      <ion-nav-link [component]="nextPage"
+      [componentProps]="{level: level+1, arrayId: arrayId, siteId: i}">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{item.name}}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <p>{{item.deploy}}</p>
+          </ion-card-content>
+        </ion-card>
+        
+      </ion-nav-link>
+    </ion-list>
+
   </section>
   <!-- End Section level 1 -->
 
@@ -53,8 +66,27 @@
 
   <!-- Section level 2 -->
   <section *ngIf="level===2">
-    Client
-    {{array[arrayId].sites[siteId].client.name}}
+
+    <!-- BreadCrumb -->
+    <div>
+      
+      <ion-nav-link 
+        [component]="nextPage"
+        [componentProps]="{level: 0}">
+        {{array[arrayId].name}}
+      </ion-nav-link>
+      > 
+      <ion-nav-link
+        router-direction="back">
+        {{array[arrayId].sites[siteId].name}} 
+      </ion-nav-link>
+      > Client
+
+    </div>
+
+    <div>
+      {{array[arrayId].sites[siteId].client.name}}
+    </div>
   </section>
   <!-- End Section level 2 -->
 
